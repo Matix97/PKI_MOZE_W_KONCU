@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+/*
 using Microsoft.AspNetCore.Http;
 using System.Net.WebSockets;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.StaticFiles;
 using System.Threading;
 
-
+*/
 namespace DotNetCoreSqlDb {
     public class Startup {
         public Startup (IConfiguration configuration) {
@@ -57,6 +57,7 @@ namespace DotNetCoreSqlDb {
             } else {
                 app.UseExceptionHandler ("/Home/Error");
             }
+			/*
 #if NoOptions
             #region UseWebSockets
             app.UseWebSockets();
@@ -92,7 +93,7 @@ namespace DotNetCoreSqlDb {
                     await next();
                 }
             });
-#endregion
+#endregion*/
             app.UseFileServer();
             app.UseStaticFiles ();
             app.UseMvc (routes => {
@@ -100,7 +101,7 @@ namespace DotNetCoreSqlDb {
                     name: "default",
                     template: "{controller=Todos}/{action=Index}/{id?}");
             });
-        }
+        }/*
         #region Echo
  private async Task Echo(HttpContext context, WebSocket webSocket)
         {
@@ -113,6 +114,6 @@ namespace DotNetCoreSqlDb {
             }
             await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,CancellationToken.None);
         }
-#endregion
+#endregion*/
     }
 }
