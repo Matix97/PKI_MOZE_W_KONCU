@@ -44,4 +44,26 @@
         </tr>
 }
     </tbody>
+	         @{
+List<SelectListItem> listItems = new List<SelectListItem>();
+listItems.Add(new SelectListItem
+  {
+      Text = "AtlantaPort",
+      Value = "AtlantaPort"
+  });
+listItems.Add(new SelectListItem
+ {
+     Text = "NewJersyTerminal",
+     Value = "NewJersyTerminal",
+     Selected = true
+ });
+listItems.Add(new SelectListItem
+ {
+     Text = "AWS",
+     Value = "AWS"
+ });
+        }
+
+ @Html.DropDownList("yourDropName", listItems, new { @class = "form-control" })
+    </div>
 </table>
