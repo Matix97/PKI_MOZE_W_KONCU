@@ -1,0 +1,36 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.AllTables>
+
+@{
+    ViewData["Title"] = "AllTables";
+}
+<h2>Lista tabel</h2>
+
+<p>
+    
+</p>
+<!-- <table class="table">
+
+    <tbody>
+@foreach (var item in Model) {
+        <tr>         
+            <td>
+                @Html.DisplayFor(modelItem => item.TablesName)
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+listItems.Add(new SelectListItem
+  {
+      Text = item.TablesName,
+      Value = item.TablesName
+  });
+
+                }
+            </td>
+		@Html.DropDownList("yourDropName", listItems, new { @class = "form-control" })  
+           <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Choose</a> |
+             
+            </td> 
+        </tr>
+}
+    </tbody>
+</table> -->

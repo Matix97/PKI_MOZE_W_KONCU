@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Data.SqlClient;
+using System.Text;
+
 /*
 using Microsoft.AspNetCore.Http;
 using System.Net.WebSockets;
@@ -30,16 +33,15 @@ namespace DotNetCoreSqlDb {
             // Add framework services.
             services.AddMvc ();
 
-            // services.AddDbContext<MyDatabaseContext>(options =>
-            //        options.UseSqlite("Data Source=localdatabase.db"));
-            // Use SQL Database if in Azure, otherwise, use SQLite
-            if (Environment.GetEnvironmentVariable ("ASPNETCORE_ENVIRONMENT") == "Production")
-                services.AddDbContext<MyDatabaseContext> (options =>
+     /*To ogólnie lepsze, bo nie ma co przy testowaniu bawić się "prawdziwą bazą danych, ale przy moich tesatch jednak się pobawimy */
+            // if (Environment.GetEnvironmentVariable ("ASPNETCORE_ENVIRONMENT") == "Production")
+            //     services.AddDbContext<MyDatabaseContext> (options =>
+            //         options.UseSqlServer (Configuration.GetConnectionString ("MyDbConnection")));
+            // else
+            //     services.AddDbContext<MyDatabaseContext> (options =>
+            //         options.UseSqlite ("Data Source=localdatabase.db"));
+services.AddDbContext<MyDatabaseContext> (options =>
                     options.UseSqlServer (Configuration.GetConnectionString ("MyDbConnection")));
-            else
-                services.AddDbContext<MyDatabaseContext> (options =>
-                    options.UseSqlite ("Data Source=localdatabase.db"));
-
             // Automatically perform database migration
             services.BuildServiceProvider ().GetService<MyDatabaseContext> ().Database.Migrate ();
         }
@@ -57,63 +59,14 @@ namespace DotNetCoreSqlDb {
             } else {
                 app.UseExceptionHandler ("/Home/Error");
             }
-			/*
-#if NoOptions
-            #region UseWebSockets
-            app.UseWebSockets();
-            #endregion
-#endif
-#if UseOptions
-            #region UseWebSocketsOptions
-            var webSocketOptions = new WebSocketOptions()
-            {
-                KeepAliveInterval = TimeSpan.FromSeconds(10),
-                ReceiveBufferSize = 4 * 1024
-            };
-            app.UseWebSockets(webSocketOptions);
-            #endregion
-#endif
-#region AcceptWebSocket
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "/ws")
-                {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await Echo(context, webSocket);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
-                }
-                else
-                {
-                    await next();
-                }
-            });
-#endregion*/
+			 
             app.UseFileServer();
             app.UseStaticFiles ();
             app.UseMvc (routes => {
                 routes.MapRoute (
                     name: "default",
-                    template: "{controller=Todos}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }/*
-        #region Echo
- private async Task Echo(HttpContext context, WebSocket webSocket)
-        {
-            var buffer = new byte[1024 * 4];
-            WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer),CancellationToken.None);
-            while (!result.CloseStatus.HasValue)
-            {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
-                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-            }
-            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,CancellationToken.None);
         }
-#endregion*/
     }
 }
