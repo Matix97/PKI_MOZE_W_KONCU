@@ -1,0 +1,43 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.Klient>
+
+@{
+    ViewData["Title"] = "Klient";
+}
+
+<h2>Witaj Klient</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.imie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nazwisko)
+                </th>
+				<th>
+                     @Html.DisplayNameFor(model => model.saldo)
+                </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <th>
+                    @Html.DisplayFor(model => item.imie)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => item.nazwisko)
+                </th>
+				<th>
+                     @Html.DisplayFor(model => item.saldo)
+                </th>
+     
+        </tr>
+}
+    </tbody>
+	   
+    </div>
+</table>
