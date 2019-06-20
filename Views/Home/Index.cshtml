@@ -5,64 +5,47 @@
 
 
 
-	         @{
-                 @using System;
-@using System.Data.SqlClient;
-@using System.Text;{
-                       SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-List<SelectListItem> listItems = new List<SelectListItem>();
-                builder.ConnectionString="Server=tcp:zpiprojetk.database.windows.net,1433;Initial Catalog=zpiProjekt;Persist Security Info=False;User ID=zpiAdmin;Password=catch23!M;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+    @{
+        @using System;
+        @using System.Data.SqlClient;
+        @using System.Text;{
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            builder.ConnectionString = "Server=tcp:zpiprojetk.database.windows.net,1433;Initial Catalog=zpiProjekt;Persist Security Info=False;User ID=zpiAdmin;Password=catch23!M;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder next = new StringBuilder();
+                next.Append("SELECT Distinct TABLE_NAME FROM information_schema.TABLES");
+                String forSQL = next.ToString();
               
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                using (SqlCommand command = new SqlCommand(forSQL, connection))
                 {
-                    Console.WriteLine("\nQuery data example:");
-                    Console.WriteLine("=========================================\n");
-                    
-                    connection.Open();       
-                                 //try get each tables' name
-                    StringBuilder next = new StringBuilder();
-                    next.Append("SELECT Distinct TABLE_NAME FROM information_schema.TABLES");
-                    String forSQL=next.ToString();
-                     Console.WriteLine("\nTables IN DATEBASE:");
-                    Console.WriteLine("=========================================\n");
-                    using(SqlCommand command = new SqlCommand(forSQL, connection))
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        using(SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while(reader.Read())
+                           // Console.WriteLine("{0}", reader.GetString(0));
+                            listItems.Add(new SelectListItem
                             {
-                                Console.WriteLine("{0}",reader.GetString(0));
-                                listItems.Add(new SelectListItem
-  {
-      Text = reader.GetString(0),
-      Value = reader.GetString(0)
-  });
-                            }
+                                Text = reader.GetString(0),
+                                Value = reader.GetString(0)
+                            });
                         }
                     }
-
                 }
-               
-                @Html.DropDownList("yourDropName", listItems, new { @class = "form-control" })}
-@using (Html.BeginForm())
-{
-    <input type="submit" name="chooseTable" class="button1" value="Wybierz Tabele" />
-}
-<button type="button" onclick="location.href='@Url.Action("Open","")'"
-<!-- <form method="post" action="<%: Url.Action("Error", "HomeController") %>
-   <input type="submit" value="Click me to go to /Home/About" />
-</form>
-<div>
-<br>
-<button onclick="location.href='@Url.Action("Error", "HomeController")'" />
-<br>
-</div>
-<a href="HomeController">
-    <input type="button" value="Click Me" />
-</a> -->
 
-        }
+            }
+
+            @Html.DropDownList("yourDropName", listItems, new { @class = "form-control" })
+          
+             <input type="button" value="Show Table" onclick="location.href='@Url.Action("Index", "Klient")'" />
+              
+            }
+            
+     
+
+
+}
 
  
-  
-</div>
