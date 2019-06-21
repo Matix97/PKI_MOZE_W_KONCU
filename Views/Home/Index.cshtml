@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DotNetCoreSqlDb.Models.AllTables
+@{
     ViewData["Title"] = "Home Page";  
 }
 
@@ -12,13 +13,34 @@
     String choosentable=ViewData["choosenTable"] as String;
     <input type="button" value="Show Table" onclick="location.href='@Url.Action("Index", choosentable)'" onclick="test"/>
     <button type="button" onclick="location.href='@Url.Action("Index","Todos")'">Klinknij</button>
-    <div>  
-    <label>Select your tables:</label>  
-    @Html.ListBox("cos",listItems2, new { @class = "form-control" })
-    
-  
-    </div>
-    
+   
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post, new { role = "form" })) {
+
+
+
+                    @* State selection dropdown *@
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TablesName)
+                        @Html.DropDownListFor(m => m.TablesName, // 1. Store selected value in Model.State;
+                                                            // when page is rendered after postback,
+                                                            // take selected value from Model.State.
+
+                                              // 2. Take list of values from Model.States
+                                              Model.Tables, 
+
+                                              // 3. Text for the first 'default' option
+                                              "- Please select a state -", 
+
+                                              //4. A class name to assign to <select> tag
+                                              new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign up</button>
+                }
+            </div>
+        </div>
 
 
 }
