@@ -20,7 +20,7 @@ namespace DotNetCoreSqlDb.Controllers
              // GET: AllTables
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Table.ToListAsync());
+            return View(await _context.AllTables.ToListAsync());
         }
 
 
