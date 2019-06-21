@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
+using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace DotNetCoreSqlDb.Controllers
 {
@@ -12,9 +16,28 @@ namespace DotNetCoreSqlDb.Controllers
         
         public IActionResult Index()
         {
+            ViewBag.Tableslist = GetAllTables(null);//to list box.... nie wiem czy potrzeba
+            downloadAllTables();
+            ViewData["choosenTable"] = "Klient";
             return View();
-        }
+        }     
 
+        //  public ActionResult Index( )
+        //  {
+        //      return View();
+        //  }
+        // {
+        //     ViewBag.Tableslist = GetAllTables(null);//to list box.... nie wiem czy potrzeba
+        //     downloadAllTables();
+        //     ViewData["choosenTable"] = "Klient";
+        //     return View();
+        // }      
+
+        public ActionResult MojaMetoda()
+        {
+            Console.WriteLine("Moja MEtoda TEST");
+            return View();
+        }             
      
 
         public IActionResult About()
@@ -34,6 +57,50 @@ namespace DotNetCoreSqlDb.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        private MultiSelectList GetAllTables(string[] selectedValues)
+        {
+            var tables=new List<Models.Table>()
+            //todo TUTAJ Wypełnij tabelami z bazy danych....
+            {
+                new Models.Table(){ID=1,Name="Przykład"}
+            };
+            return new MultiSelectList(tables,"ID","Name", selectedValues);
+        }
+        private void downloadAllTables()
+        {
+                        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            builder.ConnectionString = "Server=tcp:zpiprojetk.database.windows.net,1433;Initial Catalog=zpiProjekt;Persist Security Info=False;User ID=zpiAdmin;Password=catch23!M;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                StringBuilder next = new StringBuilder();
+                next.Append("SELECT Distinct TABLE_NAME FROM information_schema.TABLES");
+                String forSQL = next.ToString();
+              
+                using (SqlCommand command = new SqlCommand(forSQL, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                           if(!(reader.GetString(0).Equals("__EFMigrationsHistory") || reader.GetString(0).Equals("database_firewall_rules") ))//nie wyświetlaj jakiś systemowych tabel
+                           {
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = reader.GetString(0),
+                                    Value = reader.GetString(0)
+                                });
+                           }
+                        }
+                    }
+                }
+
+            }
+           
+              ViewData["AllTables"] = listItems;
         }
     }
 }

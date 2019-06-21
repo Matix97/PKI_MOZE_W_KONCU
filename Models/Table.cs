@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DotNetCoreSqlDb.Models
 {
-    public class AllTables
+    public class Table
     {
         public int ID { get; set; }
-        public string TablesName { get; set; }
+        public string Name { get; set; }
 
     }
 }

@@ -1,49 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";  
 }
 
-
-
-
-    @{
-        @using System;
-        @using System.Data.SqlClient;
-        @using System.Text;{
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            List<SelectListItem> listItems = new List<SelectListItem>();
-            builder.ConnectionString = "Server=tcp:zpiprojetk.database.windows.net,1433;Initial Catalog=zpiProjekt;Persist Security Info=False;User ID=zpiAdmin;Password=catch23!M;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-            {
-                connection.Open();
-                StringBuilder next = new StringBuilder();
-                next.Append("SELECT Distinct TABLE_NAME FROM information_schema.TABLES");
-                String forSQL = next.ToString();
-              
-                using (SqlCommand command = new SqlCommand(forSQL, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                           // Console.WriteLine("{0}", reader.GetString(0));
-                            listItems.Add(new SelectListItem
-                            {
-                                Text = reader.GetString(0),
-                                Value = reader.GetString(0)
-                            });
-                        }
-                    }
-                }
-
-            }
-
-            @Html.DropDownList("yourDropName", listItems, new { @class = "form-control" })
-          
-             <input type="button" value="Show Table" onclick="location.href='@Url.Action("Index", "Klient")'" />
-              
-            }
-            
-     
+@{
+    
+    List<SelectListItem> listItems2 = ViewData["AllTables"] as List<SelectListItem>;
+        <div>
+    @Html.DropDownList("yourDropName" , listItems2, new { @class = "form-control" })
+    </div>
+   
+    String choosentable=ViewData["choosenTable"] as String;
+    <input type="button" value="Show Table" onclick="location.href='@Url.Action("Index", choosentable)'" onclick="test"/>
+    <button type="button" onclick="location.href='@Url.Action("Index","Todos")'">Klinknij</button>
+    <div>  
+    <label>Select your tables:</label>  
+    @Html.ListBox("cos",listItems2, new { @class = "form-control" })
+    
+  
+    </div>
+    
 
 
 }
