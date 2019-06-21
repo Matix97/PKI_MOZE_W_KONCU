@@ -22,7 +22,16 @@ namespace DotNetCoreSqlDb.Controllers
             return View();
         }     
 
-
+        //  public ActionResult Index( )
+        //  {
+        //      return View();
+        //  }
+        // {
+        //     ViewBag.Tableslist = GetAllTables(null);//to list box.... nie wiem czy potrzeba
+        //     downloadAllTables();
+        //     ViewData["choosenTable"] = "Klient";
+        //     return View();
+        // }      
 
         public ActionResult MojaMetoda()
         {

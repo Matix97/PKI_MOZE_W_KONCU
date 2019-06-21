@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DotNetCoreSqlDb.Models
 {
@@ -9,6 +10,6 @@ namespace DotNetCoreSqlDb.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-public IEnumerable<SelectListItem> States { get; set; }
+
     }
 }
