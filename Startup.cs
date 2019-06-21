@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Data.SqlClient;
 using System.Text;
-//using Microsoft.AspNetCore.Razor.Design;
 
 /*
 using Microsoft.AspNetCore.Http;
@@ -45,7 +44,6 @@ services.AddDbContext<MyDatabaseContext> (options =>
                     options.UseSqlServer (Configuration.GetConnectionString ("MyDbConnection")));
             // Automatically perform database migration
             services.BuildServiceProvider ().GetService<MyDatabaseContext> ().Database.Migrate ();
-            //services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +59,7 @@ services.AddDbContext<MyDatabaseContext> (options =>
             } else {
                 app.UseExceptionHandler ("/Home/Error");
             }
-           // app.UseWebSockets();
+			 
             app.UseFileServer();
             app.UseStaticFiles ();
             app.UseMvc (routes => {
