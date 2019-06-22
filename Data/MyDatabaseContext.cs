@@ -17,6 +17,7 @@ namespace DotNetCoreSqlDb.Models
          public DbSet<DotNetCoreSqlDb.Models.Klient> Klient { get; set; }
 
         public DbSet<DotNetCoreSqlDb.Models.AllTables> AllTables {get;set;}
+         public DbSet<DotNetCoreSqlDb.Models.Adres> Adres {get;set;}
 
        
     }

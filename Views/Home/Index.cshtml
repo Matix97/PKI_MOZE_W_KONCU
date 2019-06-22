@@ -5,30 +5,25 @@
 
 @{
     
-    List<SelectListItem> listItems2 = ViewData["AllTables"] as List<SelectListItem>;
-    <div>
-        DropDownList "using" ViewData first: 
-    @Html.DropDownList("yourDropName" , listItems2, new { @class = "form-control" })
-    </div>
-   <div>
-       DropDownList "using" ViewData second: 
-    @Html.DropDownList("yourDropName" , (IEnumerable<SelectListItem>)ViewData["AllTables"], new { @class = "form-control" })
-    </div>
-   
-   <div>
-       DropDownList "using" ViewBag: 
-       @Html.DropDownList("MySkills", (IEnumerable<SelectListItem>)ViewBag.MySkills, new { @class = "form-control" })
-    </div>
+  
 <br>
      String choosentable=ViewData["choosenTable"] as String;
     <input type="button" value="Kliet" onclick="location.href='@Url.Action("Index", choosentable)'" onclick="test"/>
     <button type="button" onclick="location.href='@Url.Action("Index","Todos")'">Todos</button>
-@using (Html.BeginForm("Index", "Index", FormMethod.Post, new { role = "form" })) {
+   
+<div>
+<br>
+</div>
+        <div>
 
+       @Html.DropDownList("MySkills", (IEnumerable<SelectListItem>)ViewBag.MySkills, new { @class = "form-control" })
+           string txt = MySkills.SelectedItem.Text;
+    </div>
+@using (Html.BeginForm("Index",  "Adres", FormMethod.Post, new { role = "form" })) {
+        
 
-
+      <button type="submit" class="btn btn-primary">Wybierz tabele</button>
 }
     
-
 
 }
