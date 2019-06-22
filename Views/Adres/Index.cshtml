@@ -1,0 +1,55 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.Adres>
+
+@{
+    ViewData["Title"] = "Klient";
+}
+
+<h2>Adresy</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.miast)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ulicac)
+                </th>
+				<th>
+                     @Html.DisplayNameFor(model => model.nrDomy)
+                </th>
+                <th>
+                     @Html.DisplayNameFor(model => model.kodPocztowy)
+                </th>
+                <th>
+                     @Html.DisplayNameFor(model => model.adres_klient_id)
+                </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <th>
+                    @Html.DisplayFor(model => item.miast)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => item.ulicac)
+                </th>
+				<th>
+                     @Html.DisplayFor(model => item.nrDomy)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => item.kodPocztowy)
+                </th>
+				<th>
+                     @Html.DisplayFor(model => item.adres_klient_id)
+                </th>
+     
+        </tr>
+}
+    </tbody>
+	   
+    </div>
+</table>
