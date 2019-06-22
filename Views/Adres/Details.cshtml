@@ -1,0 +1,48 @@
+@model DotNetCoreSqlDb.Models.Adres
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Adres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       <dt>
+            @Html.DisplayNameFor(model => model.miast)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.miast)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ulicac)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ulicac)
+        </dd>
+              <dt>
+            @Html.DisplayNameFor(model => model.nrDomy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nrDomy)
+        </dd>
+              <dt>
+            @Html.DisplayNameFor(model => model.kodPocztowy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.kodPocztowy)
+        </dd>
+              <dt>
+            @Html.DisplayNameFor(model => model.adres_klient_id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.adres_klient_id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.adres_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

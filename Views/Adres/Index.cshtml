@@ -46,6 +46,11 @@
 				<th>
                      @Html.DisplayFor(model => item.adres_klient_id)
                 </th>
+                <td>
+                <a asp-action="Edit" asp-route-id="@item.adres_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.adres_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.adres_id">Delete</a>
+            </td>
      
         </tr>
 }
