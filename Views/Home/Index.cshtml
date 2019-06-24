@@ -4,26 +4,23 @@
 }
 
 @{
-    
-  
-<br>
-     String choosentable=ViewData["choosenTable"] as String;
-    <input type="button" value="Kliet" onclick="location.href='@Url.Action("Index", choosentable)'" onclick="test"/>
-    <button type="button" onclick="location.href='@Url.Action("Index","Todos")'">Todos</button>
-   
-<div>
-<br>
-</div>
-        <div>
-
-       @Html.DropDownList("MySkills", (IEnumerable<SelectListItem>)ViewBag.MySkills, new { @class = "form-control" })
-           string txt = MySkills.SelectedItem.Text;
+    <br>    
+    <div>
+        @Html.DropDownList("MySkills", (IEnumerable<SelectListItem>)ViewBag.MySkills, new { @class = "form-control" }) 
+    </div> 
+    <br>
+    <div>
+        @{String choosentable=ViewData["choosenTable"] as String;
+        <input class="btn btn-primary" type="button" value="Kliet" onclick="location.href='@Url.Action("Index", choosentable)'" onclick="test"/>}
     </div>
-@using (Html.BeginForm("Index",  "Adres", FormMethod.Post, new { role = "form" })) {
-        
-
-      <button type="submit" class="btn btn-primary">Wybierz tabele</button>
-}
-    
-
+    <br>
+    <div>
+        <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index","Todos")'">Todos</button>
+    </div>
+    <br>
+    <div>
+        @using (Html.BeginForm("Index",  "Adres", FormMethod.Post, new { role = "form" })) {
+            <button type="submit" class="btn btn-primary">Adres</button>
+        }   
+    </div>
 }
