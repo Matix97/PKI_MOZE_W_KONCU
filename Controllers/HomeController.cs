@@ -12,61 +12,11 @@ namespace DotNetCoreSqlDb.Controllers
 {
     public class HomeController : Controller
     {
-
-      
-        // 2. Action method for handling user-entered data when 'Sign Up' button is pressed.
-        //
         [HttpPost]
-        public IActionResult Index(AllTables model)
+        [ActionName("SendQuery")]
+        public IActionResult Cos(Query query)
         {
-            // Get all states again
-            var tables = GetAllTables();
-
-            // Set these states on the model. We need to do this because
-            // only the selected value from the DropDownList is posted back, not the whole
-            // list of states.
-            model.Tables = GetSelectListItems(tables);
-
-            // In case everything is fine - i.e. both "Name" and "State" are entered/selected,
-            // redirect user to the "Done" page, and pass the user object along via Session
-            // if (ModelState.IsValid)
-            // {
-            //     Session["SignUpModel"] = model;
-            //     return RedirectToAction("Done");
-            // }
-
-            // Something is not right - so render the registration page again,
-            // keeping the data user has entered by supplying the model.
-            return View("~/Views/Klient/Index.cshtml");
-        }
-         private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
-        {
-            // Create an empty list to hold result of the operation
-            var selectList = new List<SelectListItem>();
-
-            // For each string in the 'elements' variable, create a new SelectListItem object
-            // that has both its Value and Text properties set to a particular value.
-            // This will result in MVC rendering each item as:
-            //     <option value="State Name">State Name</option>
-            foreach (var element in elements)
-            {
-                selectList.Add(new SelectListItem
-                {
-                    Value = element,
-                    Text = element
-                });
-            }
-
-            return selectList;
-        }
-
-         private IEnumerable<string> GetAllTables()
-        {
-            return new List<string>
-            {
-                "Aders",
-                "Klient",
-                "Todos"            };
+            return View();
         }
         public IActionResult Index()
         {            
@@ -135,5 +85,62 @@ namespace DotNetCoreSqlDb.Controllers
               ViewData["AllTables"] = listItems;
                 return selectList;  
         }
+        
+      
+        // 2. Action method for handling user-entered data when 'Sign Up' button is pressed.
+        //
+        [HttpPost]
+        public IActionResult Index(AllTables model)
+        {
+            // Get all states again
+            var tables = GetAllTables();
+
+            // Set these states on the model. We need to do this because
+            // only the selected value from the DropDownList is posted back, not the whole
+            // list of states.
+            model.Tables = GetSelectListItems(tables);
+
+            // In case everything is fine - i.e. both "Name" and "State" are entered/selected,
+            // redirect user to the "Done" page, and pass the user object along via Session
+            // if (ModelState.IsValid)
+            // {
+            //     Session["SignUpModel"] = model;
+            //     return RedirectToAction("Done");
+            // }
+
+            // Something is not right - so render the registration page again,
+            // keeping the data user has entered by supplying the model.
+            return View("~/Views/Klient/Index.cshtml");
+        }
+         private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
+        {
+            // Create an empty list to hold result of the operation
+            var selectList = new List<SelectListItem>();
+
+            // For each string in the 'elements' variable, create a new SelectListItem object
+            // that has both its Value and Text properties set to a particular value.
+            // This will result in MVC rendering each item as:
+            //     <option value="State Name">State Name</option>
+            foreach (var element in elements)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = element,
+                    Text = element
+                });
+            }
+
+            return selectList;
+        }
+
+         private IEnumerable<string> GetAllTables()
+        {
+            return new List<string>
+            {
+                "Aders",
+                "Klient",
+                "Todos"            };
+        }
     }
+
 }
