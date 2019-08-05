@@ -1,4 +1,4 @@
-@model DotNetCoreSqlDb.Models.NoteSet
+@model DotNetCoreSqlDb.Models.Klient
 
 @{
     ViewData["Title"] = "Details";
@@ -10,33 +10,27 @@
     <h4>Klient</h4>
     <hr />
     <dl class="dl-horizontal">
-      <dt>
-            @Html.DisplayNameFor(model => model.category)
+       <dt>
+            @Html.DisplayNameFor(model => model.imie)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.category)
+            @Html.DisplayFor(model => model.imie)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.main_name)
+            @Html.DisplayNameFor(model => model.nazwisko)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.main_name)
+            @Html.DisplayFor(model => model.nazwisko)
         </dd>
               <dt>
-            @Html.DisplayNameFor(model => model.long_description)
+            @Html.DisplayNameFor(model => model.saldo)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.long_description)
-        </dd>
-           <dt>
-            @Html.DisplayNameFor(model => model.tags)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.tags)
+            @Html.DisplayFor(model => model.saldo)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.note_id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.klient_id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
